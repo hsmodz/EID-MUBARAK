@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EID MUBARAK 2025 - Husnain</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f8ff;
+      text-align: center;
+      padding: 50px;
+    }
+    h1 {
+      color: #ff4500;
+      animation: fadeIn 2s ease-in-out;
+    }
+    .container {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      display: inline-block;
+      animation: slideIn 1.5s ease-in-out;
+    }
+    input[type="text"] {
+      padding: 10px;
+      width: 200px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      margin-top: 20px;
+    }
+    button {
+      padding: 10px 20px;
+      background-color: #ff4500;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+    button:hover {
+      background-color: #e03e00;
+    }
+    .link {
+      margin-top: 20px;
+      color: #007bff;
+      word-break: break-all;
+    }
+    .copy-button {
+      padding: 5px 10px;
+      background-color: #28a745;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+    .copy-button:hover {
+      background-color: #218838;
+    }
+    .timer {
+      font-size: 24px;
+      margin-top: 30px;
+      color: #333;
+      animation: pulse 1s infinite alternate;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    @keyframes slideIn {
+      from { transform: translateY(-50px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+    @keyframes pulse {
+      from { transform: scale(1); }
+      to { transform: scale(1.1); }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>EID MUBARAK IN ADVANCE OF 2025</h1>
+    <p>Welcome, <strong id="userName">Husnain</strong>!</p>
+    <p>Enter your name below to generate a personalized EID MUBARAK link:</p>
+    <input type="text" id="nameInput" placeholder="Enter your name">
+    <button onclick="generateLink()">Generate Link</button>
+    <div id="linkContainer" class="link"></div>
+    <button class="copy-button" onclick="copyLink()" id="copyButton" style="display: none;">Copy Link</button>
+    <div class="timer" id="countdown"></div>
+  </div>
+
+  <script>
+    // Function to generate the personalized link
+    function generateLink() {
+      const name = document.getElementById('nameInput').value.trim();
+      if (name) {
+        // Generate a link with the user's name
+        const baseUrl = window.location.origin + window.location.pathname;
+        const link = `${baseUrl}?name=${encodeURIComponent(name)}`;
+        document.getElementById('linkContainer').innerHTML = `<a href="${link}" target="_blank">${link}</a>`;
+        document.getElementById('copyButton').style.display = 'inline-block';
+      } else {
+        alert('Please enter your name!');
+      }
+    }
+
+    // Function to copy the generated link to the clipboard
+    function copyLink() {
+      const link = document.getElementById('linkContainer').innerText;
+      navigator.clipboard.writeText(link).then(() => {
+        alert('Link copied to clipboard!');
+      }).catch(() => {
+        alert('Failed to copy link. Please copy it manually.');
+      });
+    }
+
+    // Function to display the user's name from the URL
+    function displayUserName() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const name = urlParams.get('name');
+      if (name) {
+        document.getElementById('userName').textContent = decodeURIComponent(name);
+      }
+    }
+
+    // Function to update the countdown timer
+    function updateCountdown() {
+      const eidDate = new Date('April 1, 2025 00:00:00').getTime();
+      const now = new Date().getTime();
+      const timeLeft = eidDate - now;
+
+      const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+
+      document.getElementById('countdown').innerHTML = `Countdown to Eid: ${days}d ${hours}h ${minutes}m ${seconds}s`;
+    }
+
+    // Display the user's name and start the countdown
+    displayUserName();
+    setInterval(updateCountdown, 1000);
+    updateCountdown();
+  </script>
+</body>
+</html>
